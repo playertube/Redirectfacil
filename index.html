@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Aguarde...</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    text-align:center;
+    padding-top:60px;
+}
+
+.container{
+    background:#fff;
+    max-width:500px;
+    margin:auto;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    color:#333;
+}
+
+#frase{
+    font-style:italic;
+    margin:20px 0;
+    color:#555;
+}
+
+.banner{
+    margin-top:20px;
+}
+</style>
+
+<script>
+
+function getParametro(nome){
+    const params = new URLSearchParams(window.location.search);
+    return params.get(nome);
+}
+
+const frases = [
+"“Penso, logo existo.” – René Descartes",
+"“A vida só pode ser compreendida olhando-se para trás.” – Søren Kierkegaard",
+"“A simplicidade é o último grau de sofisticação.” – Leonardo da Vinci",
+"“Tudo o que somos é resultado do que pensamos.” – Buda",
+"“Conhece-te a ti mesmo.” – Sócrates",
+"“A imaginação é mais importante que o conhecimento.” – Albert Einstein",
+"“A felicidade depende de nós mesmos.” – Aristóteles",
+"“Quem pensa pouco, erra muito.” – Leonardo da Vinci"
+];
+
+let tempo = 10;
+
+function iniciar(){
+
+    const destino = getParametro("url");
+
+    if(!destino){
+        document.getElementById("status").innerText = "URL inválida.";
+        return;
+    }
+
+    const fraseAleatoria = frases[Math.floor(Math.random()*frases.length)];
+    document.getElementById("frase").innerText = fraseAleatoria;
+
+    const contador = setInterval(function(){
+
+        document.getElementById("tempo").innerText = tempo;
+
+        tempo--;
+
+        if(tempo < 0){
+            clearInterval(contador);
+            window.location.href = destino;
+        }
+
+    },1000);
+
+}
+
+</script>
+
+</head>
+
+<body onload="iniciar()">
+
+<div class="container">
+
+<h1 id="status">Aguarde <span id="tempo">10</span> segundos...</h1>
+
+<p>Enquanto isso, veja uma reflexão:</p>
+
+<p id="frase"></p>
+
+<div class="banner">
+
+<!-- Espaço publicidade 468x60 -->
+
+<div style="width:468px;height:60px;background:#ddd;margin:auto;display:flex;align-items:center;justify-content:center;">
+Publicidade 468x60
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
